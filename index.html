@@ -1,111 +1,95 @@
-<!DOCTYPE html>  
-<html lang="ar">  
-<head>  
-<meta charset="UTF-8">  
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">  
-<title>Valentine 💖</title>  
-<style>  
-  body { 
-    margin: 0; 
-    height: 100vh; 
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
-    justify-content: center; 
-    background: #ffeef6; 
-    overflow: hidden; 
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  }
-  h1 { 
-    color: #ff2f7d; 
-    text-align: center; 
-    z-index: 10; 
-    padding: 0 20px;
-  }
-  .buttons { 
-    position: relative; 
-    width: 100%; 
-    height: 300px; 
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
-  }
-  button { 
-    padding: 15px 40px; 
-    font-size: 20px; 
-    font-weight: bold; 
-    border-radius: 50px; 
-    border: none; 
-    cursor: pointer; 
-    position: absolute; 
-    touch-action: manipulation; 
-    transition: 0.2s ease;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  }
-  #yes { 
-    background: #ff4d88; 
-    color: white; 
-    z-index: 5; 
-    transform: translateX(-70px); 
-  }
-  #no { 
-    background: #b3b3b3; 
-    color: white; 
-    z-index: 5; 
-    transform: translateX(70px); 
-  }
-  #result { 
-    font-size: 30px; 
-    color: #ff1a75; 
-    display: none; 
-    text-align: center; 
-    animation: pop 0.5s ease;
-  }
-  @keyframes pop {
-    0% { transform: scale(0); }
-    100% { transform: scale(1); }
-  }
-</style>  
-</head>  
-<body>  
-  <h1 id="question">Would u be my Valentine? 💖</h1>  
-  <div class="buttons" id="area">  
-    <button id="yes">Yes</button>  
-    <button id="no">No</button>  
-  </div>  
-  <div id="result">Finally! <br> I Love You ❤️</div>  
-  <audio id="song"><source src="all-i-need.m4a" type="audio/mp4"></audio>  
-  <script>  
-    const noBtn = document.getElementById("no");
-    const yesBtn = document.getElementById("yes");
-    const result = document.getElementById("result");
-    const question = document.getElementById("question");
-    const area = document.getElementById("area");
-    const song = document.getElementById("song");
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valentine 💖</title>
 
-    function move() { 
-      const maxX = window.innerWidth - noBtn.offsetWidth;
-      const maxY = window.innerHeight - noBtn.offsetHeight;
-      const randomX = Math.random() * maxX;
-      const randomY = Math.random() * maxY;
-      noBtn.style.position = 'fixed';
-      noBtn.style.left = randomX + 'px';
-      noBtn.style.top = randomY + 'px';
-    }
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #ffeef6;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+}
 
-    noBtn.addEventListener("touchstart", (e) => { 
-      e.preventDefault(); 
-      move(); 
-    });
-    noBtn.addEventListener("mouseover", move);
+h1 {
+  color: #ff2f7d;
+  text-align: center;
+}
 
-    yesBtn.addEventListener("click", () => {
-      question.style.display = "none";
-      area.style.display = "none";
-      result.style.display = "block";
-      song.currentTime = 140; 
-      song.play().catch(e => console.log("Audio play failed"));
-    });
-  </script>  
-</body>  
+.buttons {
+  position: relative;
+  width: 100%;
+  height: 300px;
+}
+
+button {
+  padding: 15px 40px;
+  font-size: 20px;
+  font-weight: bold;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+}
+
+#yes {
+  background: #ff4d88;
+  color: white;
+  left: 40%;
+}
+
+#no {
+  background: #b3b3b3;
+  color: white;
+  left: 55%;
+}
+
+#result {
+  font-size: 30px;
+  color: #ff1a75;
+  display: none;
+}
+</style>
+</head>
+
+<body>
+<h1 id="question">Would u be my Valentine? 💖</h1>
+
+<div class="buttons">
+  <button id="yes">Yes</button>
+  <button id="no">No</button>
+</div>
+
+<div id="result">Finally! ❤️</div>
+
+<script>
+const noBtn = document.getElementById("no");
+const yesBtn = document.getElementById("yes");
+const result = document.getElementById("result");
+const question = document.getElementById("question");
+
+function move() {
+  const x = Math.random() * (window.innerWidth - 100);
+  const y = Math.random() * (window.innerHeight - 50);
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
+}
+
+noBtn.addEventListener("mouseover", move);
+noBtn.addEventListener("touchstart", move);
+
+yesBtn.onclick = () => {
+  question.style.display = "none";
+  result.style.display = "block";
+};
+</script>
+
+</body>
 </html>
